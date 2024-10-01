@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        :root {
+            /* Colors */
+            --color-background: #16171a;
+            --color-main: #16171a;
+            --color-main-background: rgba(71, 71, 71, 0.5);
+            --color-1: #be81eb;
+            --color-2: #8f61b0;
+            --color-3: #5f4175;
+
+            /* Text */
+            --text-px: 20px;
+            --header-size: calc(var(--text-px) + 5px);
+
+            /* Text Colors */
+            --color-text: #efe0fa;
+            --color-text-dark: var(--color-3);
+            --color-text-secondary: rgba(var(--color-text), 0.5);
+            --color-text-hover: #FFFFFF;
+
+            /* Border Radius */
+            --roundness: 16px;
+            --roundness-2: calc(var(--roundness) / 2);
+
+            /* Margin */
+            --margin: 10px;
+
+            /* Padding */
+            --padding: 10px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: var(--margin);
+            background-color: var(--color-background);
+        }
+
+        h3 {
+            color: var(--color-text);
+        }
+
+        label {
+            margin-left: var(--margin);
+            font-size: var(--text-px);
+            color: var(--color-text);
+            display: inline-block;
+        }
+
+        /* Container Styles */
+        .container {
+            background-color: var(--color-2);
+            
+            padding: 10px;
+            border-radius: var(--roundness);
+            text-align: center;
+        }
+
+        .text{
+            margin: 0;
+            font-size: var(--header-size);
+            font-weight: bold;
+            color: var(--color-text);
+        }
+        .required {
+            color: var(--color-1);
+            font-weight: bold;
+        }
+        .secondary{
+            font-size: calc(var(--text-px) - 4px) !important;
+            margin: var(--margin) !important;
+        }
+        #downloadData, #clearButton{
+            margin: var(--margin);
+            background-color: var(--color-main-background);
+            color: var(--color-text);
+            padding: 10px;
+            border-radius: var(--roundness);
+            border: none;
+            font-size: calc(var(--text-px) - 4px);
+            cursor: pointer;
+            transition: 0.3s ease;
+            &:hover{
+                background-color: var(--color-1);
+            }
+        }
+        /* Toggle Switch Styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+            margin-left: var(--margin);
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color-main-background);
+            transition: .4s;
+            border-radius: var(--roundness);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--color-text);
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--color-1);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Flexbox for alignment between text and toggle switch */
+        .option-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--margin);
+        }
+        .container-centered{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p class="text">Download Options</p>
+    </div>
+    <div class="container-centered">
+        <button id="downloadData">Download Intercepted Data (json array)</button>
+        <button id="clearButton">Clear Intercepted URLs</button>
+    </div>
+    <div class="option-container">
+        <label for="interceptToggle">Enable URL Interception<span class="required">*</span></label>
+        <label class="switch">
+            <input type="checkbox" id="interceptToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="option-container">
+        <label for="downloadToggle">Enable mass downloads</label>
+        <label class="switch">
+            <input type="checkbox" id="downloadToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div class="option-container">
+        <label for="loadToggle">Download and load on page<span class="required">**</span></label>
+        <label class="switch">
+            <input type="checkbox" id="loadToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="disclaimer">
+        <p class="text required secondary">* Required</p>
+        <p class="text required secondary">** Disabling this will not load the assets on the page. It will only download.</p>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
